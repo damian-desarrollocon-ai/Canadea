@@ -1,0 +1,15 @@
+# dependencias y builds
+node_modules
+dist
+
+# variables de entorno (NUNCA subir llaves)
+.env
+.env.*
+!.env.example
+
+# sistema y editor
+.DS_Store
+Thumbs.db
+*.log
+.vscode/*
+!.vscode/extensions.json
