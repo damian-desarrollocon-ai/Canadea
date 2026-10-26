@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { supabase, demoMode } from '../supabase'
 import Logo from '../Logo'
+import FaceCapture from '../components/FaceCapture'
 
 const MAX_MB = 10
 const TIPOS = ['application/pdf', 'image/jpeg', 'image/png', 'image/webp']
@@ -23,13 +24,14 @@ export default function Register() {
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
   const set = k => e => setF({ ...f, [k]: e.target.value })
-  const setFile = k => e => setFiles({ ...files, [k]: e.target.files[0] })
+  const setFile = k => e => { const f = e.target.files[0]; setFiles(prev => ({ ...prev, [k]: f })) }
 
   async function onSubmit(e) {
     e.preventDefault()
     setError('')
     const problema = Object.values(files).map(validar).find(Boolean)
     if (problema) return setError(problema)
+    if (!files.rostro) return setError('Falta la foto de tu rostro. Usa el botón para tomarla.')
     if (demoMode) return setStatus('ok')
     setLoading(true)
     try {
@@ -88,9 +90,7 @@ export default function Register() {
         <h3>Tus documentos</h3>
         <p className="hint">PDF, JPG, PNG o WEBP. Máximo {MAX_MB} MB por archivo.</p>
         {required.map(([k, l]) => <label key={k}>{l}<input type="file" accept=".pdf,image/*" onChange={setFile(k)} required /></label>)}
-        <label>Foto de tu rostro (selfie, de frente y con buena luz)
-          <input type="file" accept="image/*" capture="user" onChange={setFile('rostro')} required />
-        </label>
+        <FaceCapture onCapture={f => setFiles(prev => ({ ...prev, rostro: f }))} />
         <label>Permiso de trabajo (si ya cuentas con uno)<input type="file" accept=".pdf,image/*" onChange={setFile('permiso')} /></label>
         <label className="check">
           <input type="checkbox" checked={consent} onChange={e => setConsent(e.target.checked)} required />

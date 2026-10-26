@@ -11,6 +11,9 @@ export const agency = {
   correoOficial: 'reclutamiento@canadea.ca',      // ej. info@dominio.com
   dominioOficial: 'canadea.ca',     // ej. dominio.com (para el aviso antifraude)
   direccion: '',
+  jurisdiccion: '',       // ciudad/estado cuyos tribunales aplican (textos legales)
+  fechaLegal: '',         // fecha de última actualización de los textos legales
+  legalBorrador: true,    // pon false cuando el texto legal sea el definitivo
   telefono: '',
   redes: { facebook: '', instagram: '', tiktok: '', linkedin: '' },
 }
