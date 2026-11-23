@@ -27,3 +27,11 @@ export const demoEmpresas = [
   { id: 1, nombre: 'Agro Valley Farms (ejemplo)', dominio: 'agrovalley.example', contacto: 'rrhh@agrovalley.example' },
   { id: 2, nombre: 'Prairie Harvest Co. (ejemplo)', dominio: 'prairieharvest.example', contacto: 'hiring@prairieharvest.example' },
 ]
+// Etapas del proceso (definidas con el cliente)
+export const stages = [
+  { key: 'registro', label: 'Registro' },
+  { key: 'documentos', label: 'Validación de documentos' },
+  { key: 'seleccion', label: 'Selección de vacantes' },
+  { key: 'propuesta', label: 'Propuesta laboral' },
+  { key: 'viaje', label: 'Coordinación de viaje' },
+]
