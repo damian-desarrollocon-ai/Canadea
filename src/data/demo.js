@@ -13,7 +13,7 @@ export const demoApplications = [
   },
   {
     folio: 'CDA-2026-000087', nacimiento: '1989-11-02', nombre: 'Luis Ortega', programa: 'Permanente', empresa: 'Agro Valley Farms (ejemplo)', training: { fecha: '2026-11-20', lugar: 'Kelowna, BC (ejemplo)', detalle: 'Capacitación pagada por la empresa. Incluye seguridad en campo y manejo de maquinaria.' }, extras: [],
-    vacante: 'Operador agrícola, Columbia Británica', stage: 'vuelo',
+    vacante: 'Operador agrícola, Columbia Británica', stage: 'viaje',
     documents: [
       { tipo: 'Pasaporte', estado: 'aprobado' },
       { tipo: 'INE', estado: 'aprobado' },

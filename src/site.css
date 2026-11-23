@@ -190,3 +190,8 @@ img,svg{max-width:100%}
 .legal-note{background:#eef3f1;border:1px dashed #9fb3aa;padding:.6rem .9rem;font-size:.85rem;color:#4a5d55;border-radius:6px}
 mark.pend{background:#fdf0d8;color:#8a5a00;padding:0 .25rem;border-radius:3px}
 @media (max-width:860px){.wrap.legal{grid-template-columns:1fr}.legal-toc{position:static}}
+
+/* Proceso en 5 pasos */
+.h-steps{grid-template-columns:repeat(5,1fr)}
+@media (max-width:1000px){.h-steps{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:640px){.h-steps{grid-template-columns:1fr}}

@@ -14,9 +14,10 @@ const faqs = [
 
 const steps = [
   ['Regístrate', 'Sube tu pasaporte, CV e INE, y tu permiso si ya lo tienes.'],
-  ['Revisamos tus documentos', 'Si algo falta o no se ve bien, te decimos exactamente qué corregir.'],
-  ['Una empresa te selecciona', 'Te avisamos por correo con la capacitación pagada y sus fechas.'],
-  ['Coordinamos tu vuelo', 'Te acompañamos hasta tu llegada a Canadá.'],
+  ['Validamos tu documentación', 'Revisamos tus documentos para confirmar que cumplan con los requisitos establecidos. Si es necesario, te indicaremos qué corregir.'],
+  ['Selección de vacantes', 'Con base en tu experiencia, habilidades y trayectoria, buscamos oportunidades laborales que se ajusten a tu perfil.'],
+  ['Recibe tu propuesta laboral', 'La empresa interesada te enviará por correo electrónico su propuesta y condiciones laborales para que puedas evaluar y elegir tu mejor opción.'],
+  ['Coordinación de viaje', 'Gestionamos la programación de tu vuelo conforme a las indicaciones y fechas establecidas para tu incorporación laboral.'],
 ]
 
 export default function Home() {
@@ -36,7 +37,7 @@ export default function Home() {
             <div className="ph" style={img('hero.jpg')} role="img" aria-label="Trabajadores en un campo agrícola" />
             <div className="h-track" aria-label="Ejemplo de seguimiento de folio">
               <div className="h-track-head"><span>Folio</span><b>CDA-2026-000087</b></div>
-              <ol>{stages.map((s, i) => <li key={s.key} className={i < 4 ? 'done' : i === 4 ? 'now' : ''}>{s.label}</li>)}</ol>
+              <ol>{stages.map((s, i) => <li key={s.key} className={i < 3 ? 'done' : i === 3 ? 'now' : ''}>{s.label}</li>)}</ol>
               <p className="h-track-foot">Ejemplo ilustrativo</p>
             </div>
           </div>
@@ -53,10 +54,10 @@ export default function Home() {
 
       <section className="h-section">
         <div className="site-inner h-intro">
-          <h2>El campo canadiense necesita trabajadores cada temporada</h2>
+          <h2>Conectamos talento mexicano con oportunidades en Canadá</h2>
           <div>
-            <p>Las empresas agrícolas buscan personal confiable y con documentos en regla.</p>
-            <p>Nuestro trabajo es reunir ambos lados con un proceso ordenado, claro y sin sorpresas.</p>
+            <p>Las empresas agrícolas canadienses requieren personal comprometido y capacitado.</p>
+            <p>Facilitamos el vínculo entre empleadores y trabajadores mediante un proceso organizado y transparente.</p>
           </div>
         </div>
       </section>
@@ -66,17 +67,17 @@ export default function Home() {
           <article id="empleadores" className="h-row">
             <div className="ph" style={img('empleadores.jpg')} role="img" aria-label="Empresa agrícola en Canadá" />
             <div>
-              <h3>Empleadores</h3>
-              <p>Presentamos perfiles agrícolas preparados y con documentación revisada, y coordinamos por correo toda la comunicación del proceso de selección.</p>
-              <a className="h-more" href="/#contacto">Hablar con la agencia</a>
+              <h3>Soluciones para empleadores</h3>
+              <p>Identificamos y presentamos candidatos conforme a las necesidades de cada empresa, facilitando la coordinación y el seguimiento del proceso de selección.</p>
+              <a className="h-more" href="/#contacto">Contactar al equipo Canadea</a>
             </div>
           </article>
           <article id="candidatos" className="h-row flip">
             <div className="ph" style={img('candidatos.jpg')} role="img" aria-label="Trabajador agrícola" />
             <div>
-              <h3>Candidatos</h3>
-              <p>Regístrate una vez, sube tus documentos y sigue tu proceso hasta el vuelo. Programas temporales y con permanencia.</p>
-              <Link className="h-more" to="/registro">Crear mi cuenta</Link>
+              <h3>Tu próxima oportunidad comienza aquí</h3>
+              <p>Registra tus datos, integra tu documentación y da seguimiento a tu proceso para acceder a oportunidades de empleo agrícola en Canadá.</p>
+              <Link className="h-more" to="/registro">Iniciar mi registro</Link>
             </div>
           </article>
         </div>
