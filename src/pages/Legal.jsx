@@ -21,9 +21,7 @@ export default function Legal({ kind }) {
     <section className="wrap legal">
       <h1>{doc.titulo}</h1>
       <p className="legal-meta">Última actualización: {fill('{{fecha}}')}</p>
-      {agency.legalBorrador && (
-      )}
-      {kind === 'terminos' && (
+          {kind === 'terminos' && (
         <aside className="legal-official" id="informacion-oficial">
           <h2>{OFICIAL.titulo}</h2>
           {OFICIAL.parrafos.map((t, i) => <p key={i}>{t}</p>)}
