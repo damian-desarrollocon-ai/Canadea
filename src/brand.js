@@ -11,7 +11,7 @@ export const agency = {
   correoOficial: 'reclutamiento@canadea.ca',      // ej. info@dominio.com
   dominioOficial: 'canadea.ca',     // ej. dominio.com (para el aviso antifraude)
   direccion: '1920 San Fernando PI, Victoria, BC',
-  jurisdiccion: '',       // ciudad/estado cuyos tribunales aplican (textos legales)
+  jurisdiccion: 'CANADA',       // ciudad/estado cuyos tribunales aplican (textos legales)
   fechaLegal: '30 agosto 2026',         // fecha de última actualización de los textos legales
   legalBorrador: true,    // pon false cuando el texto legal sea el definitivo
   telefono: '8123803272',

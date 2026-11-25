@@ -22,7 +22,6 @@ export default function Legal({ kind }) {
       <h1>{doc.titulo}</h1>
       <p className="legal-meta">Última actualización: {fill('{{fecha}}')}</p>
       {agency.legalBorrador && (
-        <p className="legal-draft"><b>Borrador informativo.</b> El texto definitivo lo proporcionará la agencia y será revisado por su asesoría legal. Los datos marcados como «por confirmar» se completarán con su información.</p>
       )}
       {kind === 'terminos' && (
         <aside className="legal-official" id="informacion-oficial">
