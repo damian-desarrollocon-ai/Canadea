@@ -1,3 +1,4 @@
+import { useLayoutEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { agency, stages } from '../brand'
 
@@ -20,7 +21,22 @@ const steps = [
   ['Coordinación de viaje', 'Gestionamos la programación de tu vuelo conforme a las indicaciones y fechas establecidas para tu incorporación laboral.'],
 ]
 
+// Revela los elementos con data-reveal al entrar en pantalla (sin JS o con movimiento reducido, todo se ve normal)
+function useReveal() {
+  useLayoutEffect(() => {
+    const els = document.querySelectorAll('[data-reveal]')
+    if (!('IntersectionObserver' in window)) { els.forEach(e => e.classList.add('in')); return }
+    document.documentElement.classList.add('js-reveal')
+    const io = new IntersectionObserver(entries => entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target) }
+    }), { threshold: 0.12, rootMargin: '0px 0px -40px 0px' })
+    els.forEach(e => io.observe(e))
+    return () => { io.disconnect(); document.documentElement.classList.remove('js-reveal') }
+  }, [])
+}
+
 export default function Home() {
+  useReveal()
   return (
     <>
       <section className="h-hero">
@@ -37,7 +53,7 @@ export default function Home() {
             <div className="ph" style={img('hero.jpg')} role="img" aria-label="Trabajadores en un campo agrícola" />
             <div className="h-track" aria-label="Ejemplo de seguimiento de folio">
               <div className="h-track-head"><span>Folio</span><b>CDA-2026-000087</b></div>
-              <ol>{stages.map((s, i) => <li key={s.key} className={i < 3 ? 'done' : i === 3 ? 'now' : ''}>{s.label}</li>)}</ol>
+              <ol>{stages.map((s, i) => <li key={s.key} className={i < 3 ? 'done' : i === 3 ? 'now' : ''} style={{ '--i': i }}>{s.label}</li>)}</ol>
               <p className="h-track-foot">Ejemplo ilustrativo</p>
             </div>
           </div>
@@ -45,7 +61,7 @@ export default function Home() {
       </section>
 
       <section className="h-strip">
-        <div className="site-inner h-strip-grid">
+        <div className="site-inner h-strip-grid" data-reveal>
           <p><b>Seguimiento por folio</b>Consulta tu avance cuando quieras</p>
           <p><b>Documentos protegidos</b>Acceso restringido al equipo autorizado</p>
           <p><b>Avisos por correo</b>En cada cambio de etapa</p>
@@ -53,7 +69,7 @@ export default function Home() {
       </section>
 
       <section className="h-section">
-        <div className="site-inner h-intro">
+        <div className="site-inner h-intro" data-reveal>
           <h2>Conectamos talento mexicano con oportunidades en Canadá</h2>
           <div>
             <p>Las empresas agrícolas canadienses requieren personal comprometido y capacitado.</p>
@@ -64,7 +80,7 @@ export default function Home() {
 
       <section className="h-section h-alt">
         <div className="site-inner">
-          <article id="empleadores" className="h-row">
+          <article id="empleadores" className="h-row" data-reveal>
             <div className="ph" style={img('empleadores.jpg')} role="img" aria-label="Empresa agrícola en Canadá" />
             <div>
               <h3>Soluciones para empleadores</h3>
@@ -72,7 +88,7 @@ export default function Home() {
               <a className="h-more" href="/#contacto">Contactar al equipo Canadea</a>
             </div>
           </article>
-          <article id="candidatos" className="h-row flip">
+          <article id="candidatos" className="h-row flip" data-reveal>
             <div className="ph" style={img('candidatos.jpg')} role="img" aria-label="Trabajador agrícola" />
             <div>
               <h3>Tu próxima oportunidad comienza aquí</h3>
@@ -80,7 +96,7 @@ export default function Home() {
               <Link className="h-more" to="/registro">Iniciar mi registro</Link>
             </div>
           </article>
-          <article id="conoce" className="h-row">
+          <article id="conoce" className="h-row" data-reveal>
             <div className="ph" style={img('conoce.jpg')} role="img" aria-label="Campo agrícola al amanecer" />
             <div>
               <h3>Conoce CANADEA</h3>
@@ -101,7 +117,7 @@ export default function Home() {
       <section className="h-section">
         <div className="site-inner">
           <h2>Por qué elegirnos</h2>
-          <div className="h-three">
+          <div className="h-three" data-reveal>
             <div><h3>Transparencia</h3><p>Tu folio muestra en qué etapa estás, qué documentos están aprobados y por qué se rechazó alguno.</p></div>
             <div><h3>Respaldo</h3><p>Agencia de reclutamiento con permiso: <b>{agency.permiso || 'por confirmar'}</b>.</p></div>
             <div><h3>Acompañamiento</h3><p>Capacitación, selección y vuelo se coordinan y se te informan por escrito.</p></div>
@@ -113,7 +129,7 @@ export default function Home() {
         <div className="site-inner">
           <h2>Así es el proceso</h2>
           <ol className="h-steps">
-            {steps.map(([t, d], i) => <li key={t}><span>{i + 1}</span><h3>{t}</h3><p>{d}</p></li>)}
+            {steps.map(([t, d], i) => <li key={t} data-reveal style={{ '--d': `${i * 110}ms` }}><span>{i + 1}</span><h3>{t}</h3><p>{d}</p></li>)}
           </ol>
           <div className="h-steps-cta"><Link className="btn" to="/registro">Iniciar mi registro</Link></div>
         </div>
@@ -122,7 +138,7 @@ export default function Home() {
       <section className="h-section">
         <div className="site-inner">
           <h2>Programas</h2>
-          <div className="h-prog-list">
+          <div className="h-prog-list" data-reveal>
             <div className="h-prog"><h3>Trabajo temporal</h3><p>Contratos por temporada en cultivos y empaque.</p></div>
             <div className="h-prog"><h3>Con permanencia</h3><p>Puestos con posibilidad de continuidad para perfiles agrícolas.</p></div>
           </div>
@@ -130,14 +146,14 @@ export default function Home() {
       </section>
 
       <section id="faq" className="h-section h-alt">
-        <div className="site-inner h-faq">
+        <div className="site-inner h-faq" data-reveal>
           <h2>Preguntas frecuentes</h2>
           {faqs.map(([q, a]) => <details key={q}><summary>{q}</summary><p>{a}</p></details>)}
         </div>
       </section>
 
       <section id="contacto" className="h-cta-band">
-        <div className="site-inner">
+        <div className="site-inner" data-reveal>
           <div>
             <h2>Empieza tu registro hoy</h2>
             <p>Tarda unos minutos. Solo necesitas tus documentos a la mano.</p>

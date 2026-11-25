@@ -6,15 +6,15 @@ export const brand = {
 
 // Datos que debe entregar la agencia (se muestran en el sitio; si están vacíos, aparece "por confirmar")
 export const agency = {
-  razonSocial: '',
-  permiso: '',            // número de registro/permiso como agencia de reclutamiento
+  razonSocial: '17518986 Canadea Inc.',
+  permiso: 'BA-2025-264396',            // número de registro/permiso como agencia de reclutamiento
   correoOficial: 'reclutamiento@canadea.ca',      // ej. info@dominio.com
   dominioOficial: 'canadea.ca',     // ej. dominio.com (para el aviso antifraude)
-  direccion: '',
+  direccion: '1920 San Fernando PI, Victoria, BC',
   jurisdiccion: '',       // ciudad/estado cuyos tribunales aplican (textos legales)
-  fechaLegal: '',         // fecha de última actualización de los textos legales
+  fechaLegal: '30 agosto 2026',         // fecha de última actualización de los textos legales
   legalBorrador: true,    // pon false cuando el texto legal sea el definitivo
-  telefono: '',
+  telefono: '8123803272',
   redes: { facebook: '', instagram: '', tiktok: '', linkedin: '' },
 }
 

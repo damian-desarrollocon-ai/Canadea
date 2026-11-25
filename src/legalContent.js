@@ -46,3 +46,18 @@ export const LEGAL = {
     ],
   },
 }
+
+// Información de referencia que se muestra al inicio de la página de Términos y condiciones
+export const OFICIAL = {
+  titulo: 'Información sobre el empleo agrícola en Canadá',
+  parrafos: [
+    'La Secretaría del Trabajo y Previsión Social, a través del Servicio Nacional de Empleo, es la responsable de reclutar, seleccionar y promover el envío de trabajadores agrícolas a las diferentes provincias de Canadá, tomando en cuenta los requerimientos de los empleadores canadienses.',
+    'Desde su arribo a territorio canadiense, hasta su regreso a México, y en cooperación con Recursos Humanos y Desarrollo Social de Canadá, los derechos de los trabajadores son vigilados por los Consulados de México.',
+    'Los trabajadores agrícolas tienen derecho a una vivienda digna, a un salario previamente establecido y a contar con garantías laborales.',
+  ],
+  aviso: '{{marca}} es una agencia privada de reclutamiento. No es una dependencia ni representante del Gobierno de México ni del Gobierno de Canadá; esta información se muestra solo como referencia.',
+  fuentes: [
+    { t: 'Consulado de México en Montreal (SRE)', u: 'https://consulmex.sre.gob.mx/montreal/index.php/es/enterate/74-empleo-en-canada' },
+    { t: 'Secretaría del Trabajo y Previsión Social', u: 'https://www.gob.mx/stps' },
+  ],
+}
