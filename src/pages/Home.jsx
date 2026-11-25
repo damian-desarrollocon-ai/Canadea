@@ -26,10 +26,10 @@ export default function Home() {
       <section className="h-hero">
         <div className="site-inner h-hero-grid">
           <div>
-            <h1>Tu próximo empleo en el campo canadiense</h1>
-            <p className="h-lead">Conectamos a trabajadores agrícolas con empresas de Canadá, en programas temporales y con permanencia. Cada paso queda registrado y puedes consultarlo.</p>
+            <h1>Tu camino hacia una oportunidad laboral en Canadá comienza aquí.</h1>
+            <p className="h-lead">Te acompañamos durante cada etapa del proceso de vinculación laboral, desde tu registro y revisión documental hasta la identificación de oportunidades de empleo. Consulta el avance de tu proceso en cualquier momento.</p>
             <div className="h-cta">
-              <Link className="btn" to="/registro">Crear mi cuenta</Link>
+              <Link className="btn" to="/registro">Iniciar mi registro</Link>
               <Link className="btn line" to="/consulta">Consultar mi folio</Link>
             </div>
           </div>
@@ -80,6 +80,14 @@ export default function Home() {
               <Link className="h-more" to="/registro">Iniciar mi registro</Link>
             </div>
           </article>
+          <article id="conoce" className="h-row">
+            <div className="ph" style={img('conoce.jpg')} role="img" aria-label="Campo agrícola al amanecer" />
+            <div>
+              <h3>Conoce CANADEA</h3>
+              <p>Información clara, procesos transparentes y acompañamiento en cada etapa de tu vinculación laboral.</p>
+              <a className="h-more" href="#proceso">Conoce nuestro proceso</a>
+            </div>
+          </article>
         </div>
       </section>
 
@@ -107,6 +115,7 @@ export default function Home() {
           <ol className="h-steps">
             {steps.map(([t, d], i) => <li key={t}><span>{i + 1}</span><h3>{t}</h3><p>{d}</p></li>)}
           </ol>
+          <div className="h-steps-cta"><Link className="btn" to="/registro">Iniciar mi registro</Link></div>
         </div>
       </section>
 
@@ -134,7 +143,7 @@ export default function Home() {
             <p>Tarda unos minutos. Solo necesitas tus documentos a la mano.</p>
             {agency.correoOficial && <p>¿Dudas? Escríbenos a <a className="h-mail" href={`mailto:${agency.correoOficial}`}>{agency.correoOficial}</a></p>}
           </div>
-          <Link className="btn gold" to="/registro">Crear mi cuenta</Link>
+          <Link className="btn gold" to="/registro">Iniciar mi registro</Link>
         </div>
       </section>
     </>

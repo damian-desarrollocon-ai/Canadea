@@ -195,3 +195,23 @@ mark.pend{background:#fdf0d8;color:#8a5a00;padding:0 .25rem;border-radius:3px}
 .h-steps{grid-template-columns:repeat(5,1fr)}
 @media (max-width:1000px){.h-steps{grid-template-columns:repeat(2,1fr)}}
 @media (max-width:640px){.h-steps{grid-template-columns:1fr}}
+
+/* Navegación por secciones, apartado final del proceso e información oficial en el pie */
+html{scroll-behavior:smooth}
+#proceso,#conoce,#empleadores,#candidatos,#faq,#contacto{scroll-margin-top:5rem}
+.h-steps-cta{margin-top:2.4rem}
+.foot-official{border-top:1px solid #23413a;margin-top:1.4rem;padding-top:1.2rem}
+.site-foot details{border-bottom:0!important;padding:0!important}
+.site-foot summary{color:#fff!important;font-weight:500;cursor:pointer}
+.site-foot details p{font-size:.85rem;color:#a9bdb4;max-width:80ch;margin:.7rem 0}
+.foot-disclaimer{border-left:3px solid var(--trigo);padding-left:.8rem}
+.site-foot details a{display:inline;color:#dbe7e1;text-decoration:underline}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+
+/* Logos del pie (los archivos oficiales son negros: van sobre fondo blanco) */
+.foot-logos{margin-top:1.4rem}
+.foot-logos-box{display:flex;flex-wrap:wrap;align-items:center;gap:1rem 2.5rem;background:#fff;border-radius:8px;padding:.9rem 1.4rem}
+.foot-logos-box a,.foot-logos-box span{display:block;margin:0}
+.foot-logos-box img{display:block;height:36px;width:auto;max-width:100%}
+.h-hero h1{font-size:clamp(2rem,3.9vw,3.2rem);max-width:19ch;line-height:1.08}
+@media (max-width:640px){.h-hero h1{font-size:2rem}}

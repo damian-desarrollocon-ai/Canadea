@@ -18,6 +18,13 @@ export const agency = {
   redes: { facebook: '', instagram: '', tiktok: '', linkedin: '' },
 }
 
+// Logos del pie de página. Para cambiarlos usa otra ruta o URL en `src`; para quitarlos, deja la lista vacía: [].
+// `href` es opcional (enlace al hacer clic). Si pones archivos propios, guárdalos en public/logos/ y usa '/logos/archivo.svg'.
+export const logosOficiales = [
+  { src: 'https://www.canada.ca/etc/designs/canada/wet-boew/assets/sig-blk-en.svg', alt: 'Gobierno de Canadá', href: '' },
+  { src: 'https://www.canada.ca/etc/designs/canada/wet-boew/assets/wmms-blk.svg', alt: 'Canadá', href: '' },
+]
+
 // Etapas del proceso (SUPUESTO: confirmar con el cliente)
 export const stages = [
   { key: 'registro', label: 'Registro' },

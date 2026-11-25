@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { NavLink, Route, Routes } from 'react-router-dom'
-import { brand, agency } from './brand'
+import { brand, agency, logosOficiales } from './brand'
 import Home from './pages/Home'
 import Track from './pages/Track'
 import Admin from './pages/Admin'
@@ -101,6 +101,29 @@ export default function App() {
         <div className="site-inner foot-note">
           <p><b>Evita fraudes.</b> Solo te contactamos desde correos con el dominio {pending(agency.dominioOficial)}. Nunca te pediremos pagos por canales distintos a los que la agencia te indique por escrito, y no prometemos empleo garantizado.</p>
         </div>
+      {logosOficiales.length > 0 && (
+        <div className="site-inner foot-logos">
+          <div className="foot-logos-box">
+            {logosOficiales.map(l => {
+              const img = <img src={l.src} alt={l.alt} onError={e => { e.currentTarget.style.display = 'none' }} />
+              return l.href
+                ? <a key={l.src} href={l.href} target="_blank" rel="noopener noreferrer">{img}</a>
+                : <span key={l.src}>{img}</span>
+            })}
+          </div>
+        </div>
+      )}
+      <div className="site-inner foot-official">
+        <details>
+          <summary>Información sobre el empleo agrícola en Canadá</summary>
+          <p>La Secretaría del Trabajo y Previsión Social, a través del Servicio Nacional de Empleo, es la responsable de reclutar, seleccionar y promover el envío de trabajadores agrícolas a las diferentes provincias de Canadá, tomando en cuenta los requerimientos de los empleadores canadienses.</p>
+          <p>Desde su arribo a territorio canadiense, hasta su regreso a México, y en cooperación con Recursos Humanos y Desarrollo Social de Canadá, los derechos de los trabajadores son vigilados por los Consulados de México.</p>
+          <p>Los trabajadores agrícolas tienen derecho a una vivienda digna, a un salario previamente establecido y a contar con garantías laborales.</p>
+          <p className="foot-disclaimer">{brand.name} es una agencia privada de reclutamiento. No es una dependencia ni representante del Gobierno de México ni del Gobierno de Canadá; esta información se muestra solo como referencia. Fuentes:{' '}
+            <a href="https://www.gob.mx/stps" target="_blank" rel="noopener noreferrer">Secretaría del Trabajo y Previsión Social</a> ·{' '}
+            <a href="https://consulmex.sre.gob.mx/montreal/index.php/es/enterate/74-empleo-en-canada" target="_blank" rel="noopener noreferrer">Consulado de México en Montreal (SRE)</a>.</p>
+        </details>
+      </div>
       </footer>
     </>
   )
