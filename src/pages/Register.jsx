@@ -39,6 +39,8 @@ export default function Register() {
       if (authErr) throw authErr
       if (!data.session) return setStatus('confirmar') // el correo requiere confirmación antes de subir documentos
       const uid = data.user.id
+      const { data: ya } = await supabase.from('candidates').select('id').eq('user_id', uid).maybeSingle()
+      if (ya) return setStatus('existe') // ya tenía un registro hecho por el equipo
       const { data: cand, error: cErr } = await supabase.from('candidates')
         .insert({ user_id: uid, full_name: f.nombre, birth_date: f.nacimiento, phone: f.telefono, email: f.email }).select().single()
       if (cErr) throw cErr
@@ -67,8 +69,11 @@ export default function Register() {
       <h1>Registro recibido</h1>
       {folio && <p>Tu folio es <b>{folio}</b>. Guárdalo: lo necesitas para consultar tu avance.</p>}
       <p>Revisaremos tus documentos y te avisaremos por correo.</p>
-      <Link className="btn" to="/consulta">Consultar mi folio</Link>
+      <Link className="btn" to="/cuenta">Ir a mi panel</Link>
     </section>
+  )
+  if (status === 'existe') return (
+    <section className="wrap narrow"><h1>Ya tienes un registro</h1><p>Encontramos un registro con tu correo. Entra a tu panel para ver tu avance y cargar tus documentos.</p><Link className="btn" to="/cuenta">Ir a mi panel</Link></section>
   )
   if (status === 'confirmar') return (
     <section className="wrap narrow"><h1>Confirma tu correo</h1><p>Te enviamos un mensaje a {f.email}. Confírmalo y vuelve a ingresar para continuar con tu registro.</p></section>

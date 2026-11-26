@@ -1,0 +1,46 @@
+/* Paneles de candidato y administración */
+.wrap.dash{max-width:1080px}
+.dash-head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:1rem;margin-bottom:1.2rem}
+.dash-head h1{margin:0;max-width:none;font-size:clamp(1.6rem,3.5vw,2.3rem)}
+.dash-sub{color:#5b6b64;margin:.3rem 0 0}
+.tabs{display:flex;gap:.3rem;border-bottom:1px solid #d9e1dc;margin-bottom:1.4rem;overflow-x:auto}
+.tabs button{background:none;border:0;padding:.8rem 1rem;font:500 .95rem "Public Sans",sans-serif;color:#4a5d55;cursor:pointer;border-bottom:3px solid transparent;white-space:nowrap}
+.tabs button.on{color:var(--pino);border-color:var(--trigo);font-weight:600}
+.badge{display:inline-block;min-width:1.3rem;padding:0 .35rem;margin-left:.35rem;border-radius:99px;background:var(--arce);color:#fff;font-size:.75rem;text-align:center}
+.grid2{display:grid;grid-template-columns:1.6fr 1fr;gap:1.2rem;align-items:start}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:1rem;margin-bottom:1.4rem}
+.stat{background:#fff;border:1px solid #dde3ea;border-radius:10px;padding:1rem 1.2rem}
+.stat b{display:block;font:600 2rem Newsreader,Georgia,serif;color:var(--pino);line-height:1.1}
+.stat span{color:#5b6b64;font-size:.88rem}
+.progress{height:10px;background:#e4ebe7;border-radius:99px;overflow:hidden;margin:.6rem 0}
+.progress i{display:block;height:100%;background:linear-gradient(90deg,var(--pino),var(--trigo));border-radius:99px;transition:width .8s ease}
+.alert{background:#fdf0d8;border-left:4px solid var(--trigo);border-radius:6px;padding:.8rem 1rem;margin-bottom:1rem;display:flex;justify-content:space-between;gap:1rem;align-items:center;flex-wrap:wrap}
+.alert.bad{background:#fbe3e3;border-color:var(--arce)}
+.alert.ok{background:#e1f2e8;border-color:var(--ok)}
+.toolbar{display:flex;flex-wrap:wrap;gap:.6rem;margin-bottom:1rem;align-items:center}
+.toolbar input,.toolbar select{width:auto;margin:0;min-width:150px}
+.toolbar .grow{flex:1}
+.table{width:100%;border-collapse:collapse;background:#fff;border:1px solid #dde3ea}
+.table th{background:#f3f6f4;font-size:.78rem;text-transform:uppercase;letter-spacing:.04em;color:#5b6b64}
+.table th,.table td{padding:.7rem .8rem;text-align:left;border-bottom:1px solid #eef1ef;font-size:.92rem}
+.table tbody tr.click{cursor:pointer}.table tbody tr.click:hover{background:#f7faf8}
+.chip{display:inline-block;padding:.1rem .6rem;border-radius:99px;background:#e4ebe7;color:var(--pino);font-size:.8rem;white-space:nowrap}
+.bars .bar{display:grid;grid-template-columns:170px 1fr 30px;gap:.7rem;align-items:center;margin:.55rem 0;font-size:.9rem}
+.bars .bar i{display:block;height:12px;border-radius:99px;background:var(--pino);min-width:4px}
+.filebtn{display:inline-block;border:1px solid #b9c3cf;background:#fff;border-radius:6px;padding:.4rem .8rem;font:500 .85rem "Public Sans",sans-serif;cursor:pointer;color:var(--pino);margin:0}
+.filebtn input{display:none}
+.doc{display:grid;grid-template-columns:1fr auto;gap:.3rem .8rem;padding:.8rem 0;border-bottom:1px solid #eef1ef;align-items:center}
+.doc small{grid-column:1/-1;color:var(--arce)}
+.doc .meta{color:#6b7785;font-size:.82rem}
+.doc .acts{display:flex;gap:.4rem;flex-wrap:wrap;align-items:center}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:0 1rem}
+.note{background:#f7faf8;border:1px solid #e4ebe7;border-radius:6px;padding:.6rem .8rem;margin:.5rem 0;font-size:.92rem}
+.note small{display:block;color:#6b7785}
+.hist{list-style:none;padding:0;margin:0}
+.hist li{display:flex;justify-content:space-between;gap:1rem;padding:.45rem 0;border-bottom:1px solid #eef1ef;font-size:.9rem}
+.hist span{color:#6b7785;white-space:nowrap}
+.btn.danger{background:var(--arce)}
+.btn.sec{background:#fff;color:var(--pino);border:1.5px solid var(--pino)}
+.linkbtn{background:none;border:0;color:var(--pino);text-decoration:underline;cursor:pointer;font:inherit;padding:0}
+.help{font-size:.92rem;color:#4a5d55}
+@media (max-width:860px){.grid2,.row2{grid-template-columns:1fr}.table .hide-sm{display:none}.bars .bar{grid-template-columns:110px 1fr 28px}}
