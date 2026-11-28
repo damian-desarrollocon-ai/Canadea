@@ -80,12 +80,33 @@ export default function MiCuenta() {
     try { await navigator.clipboard.writeText(app.folio); flash('Folio copiado.') } catch { flash('No se pudo copiar. Selecciónalo manualmente.', false) }
   }
 
+  const completar = e => {
+    e.preventDefault(); const f = Object.fromEntries(new FormData(e.target))
+    accion(async () => {
+      const { data: { user } } = await supabase.auth.getUser()
+      const { data: cand, error } = await supabase.from('candidates')
+        .insert({ user_id: user.id, full_name: f.nombre, birth_date: f.nacimiento, phone: f.telefono || null, email: user.email }).select('id').single()
+      if (error) throw error
+      const { error: e2 } = await supabase.from('applications').insert({ candidate_id: cand.id, program: f.programa })
+      if (e2) throw e2
+    }, 'Registro completado. Ahora sube tus documentos.')
+  }
+
   if (app === undefined) return <section className="wrap"><p>Cargando…</p></section>
   if (app === null) return (
     <section className="wrap narrow">
-      <h1>Mi cuenta</h1>
-      <p>Aún no encontramos un registro asociado a tu cuenta.</p>
-      <Link className="btn" to="/registro">Completar registro</Link>
+      <h1>Completa tu registro</h1>
+      <p>Tu cuenta ya está creada. Faltan unos datos para abrir tu expediente.</p>
+      {msg && <p className={'alert ' + (msg.ok ? 'ok' : 'bad')} role="status">{msg.text}</p>}
+      <form className="card" onSubmit={completar}>
+        <label>Nombre completo<input name="nombre" required /></label>
+        <label>Fecha de nacimiento<input name="nacimiento" type="date" required /></label>
+        <label>Teléfono<input name="telefono" /></label>
+        <label>Programa de interés
+          <select name="programa"><option value="temporal">Trabajo temporal</option><option value="permanente">Con permanencia</option></select>
+        </label>
+        <button className="btn" disabled={busy}>Continuar</button>
+      </form>
     </section>
   )
 
@@ -241,7 +262,7 @@ export default function MiCuenta() {
             <button className="btn" disabled={busy}>Guardar cambios</button>
           </form>
           <form className="card" onSubmit={cambiarPass}>
-            <h3>Cambiar contraseña</h3>
+            <h3>Cambiar contraseña </h3>
             <label>Nueva contraseña<input name="pass" type="password" minLength={8} required /></label>
             <label>Repite la contraseña<input name="pass2" type="password" minLength={8} required /></label>
             <button className="btn" disabled={busy}>Actualizar contraseña</button>

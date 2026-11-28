@@ -24,7 +24,7 @@ export default function Register() {
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
   const set = k => e => setF({ ...f, [k]: e.target.value })
-  const setFile = k => e => { const f = e.target.files[0]; setFiles(prev => ({ ...prev, [k]: f })) }
+  const setFile = k => e => { const file = e.target.files[0]; setFiles(prev => ({ ...prev, [k]: file })) }
 
   async function onSubmit(e) {
     e.preventDefault()
@@ -35,20 +35,31 @@ export default function Register() {
     if (demoMode) return setStatus('ok')
     setLoading(true)
     try {
-      const { data, error: authErr } = await supabase.auth.signUp({ email: f.email, password: f.password })
+      // Los datos viajan con el alta de la cuenta: la base de datos crea el candidato y su folio en ese mismo momento
+      const { data, error: authErr } = await supabase.auth.signUp({
+        email: f.email,
+        password: f.password,
+        options: { data: { full_name: f.nombre, birth_date: f.nacimiento, phone: f.telefono, program: f.programa } },
+      })
       if (authErr) throw authErr
-      if (!data.session) return setStatus('confirmar') // el correo requiere confirmación antes de subir documentos
+      if (!data.session) return setStatus('confirmar') // el registro ya existe; los documentos se suben al confirmar e ingresar
       const uid = data.user.id
-      const { data: ya } = await supabase.from('candidates').select('id').eq('user_id', uid).maybeSingle()
-      if (ya) return setStatus('existe') // ya tenía un registro hecho por el equipo
-      const { data: cand, error: cErr } = await supabase.from('candidates')
-        .insert({ user_id: uid, full_name: f.nombre, birth_date: f.nacimiento, phone: f.telefono, email: f.email }).select().single()
-      if (cErr) throw cErr
-      const { data: app, error: aErr } = await supabase.from('applications')
-        .insert({ candidate_id: cand.id, program: f.programa }).select('id, folio').single()
-      if (aErr) throw aErr
+
+      let { data: app } = await supabase.from('applications').select('id, folio')
+        .order('created_at', { ascending: false }).limit(1).maybeSingle()
+      if (!app) { // respaldo si el registro automático no se creó
+        const { data: cand, error: cErr } = await supabase.from('candidates')
+          .insert({ user_id: uid, full_name: f.nombre, birth_date: f.nacimiento, phone: f.telefono || null, email: f.email }).select().single()
+        if (cErr) throw cErr
+        const r = await supabase.from('applications').insert({ candidate_id: cand.id, program: f.programa }).select('id, folio').single()
+        if (r.error) throw r.error
+        app = r.data
+      }
+
+      const { data: existentes } = await supabase.from('documents').select('doc_type').eq('application_id', app.id)
+      const ya = new Set((existentes || []).map(d => d.doc_type))
       for (const [key, file] of Object.entries(files)) {
-        if (!file) continue
+        if (!file || ya.has(key)) continue
         const ext = (file.name.split('.').pop() || 'bin').toLowerCase().replace(/[^a-z0-9]/g, '')
         const path = `${uid}/${key}-${Date.now()}.${ext}`
         const { error: uErr } = await supabase.storage.from('documentos').upload(path, file, { contentType: file.type })
@@ -72,11 +83,12 @@ export default function Register() {
       <Link className="btn" to="/cuenta">Ir a mi panel</Link>
     </section>
   )
-  if (status === 'existe') return (
-    <section className="wrap narrow"><h1>Ya tienes un registro</h1><p>Encontramos un registro con tu correo. Entra a tu panel para ver tu avance y cargar tus documentos.</p><Link className="btn" to="/cuenta">Ir a mi panel</Link></section>
-  )
   if (status === 'confirmar') return (
-    <section className="wrap narrow"><h1>Confirma tu correo</h1><p>Te enviamos un mensaje a {f.email}. Confírmalo y vuelve a ingresar para continuar con tu registro.</p></section>
+    <section className="wrap narrow">
+      <h1>Confirma tu correo</h1>
+      <p>Tu registro ya quedó creado. Te enviamos un mensaje a {f.email}: confírmalo, inicia sesión y sube tus documentos desde tu panel.</p>
+      <Link className="btn" to="/login">Ir a iniciar sesión</Link>
+    </section>
   )
 
   return (
@@ -95,7 +107,7 @@ export default function Register() {
         <h3>Tus documentos</h3>
         <p className="hint">PDF, JPG, PNG o WEBP. Máximo {MAX_MB} MB por archivo.</p>
         {required.map(([k, l]) => <label key={k}>{l}<input type="file" accept=".pdf,image/*" onChange={setFile(k)} required /></label>)}
-        <FaceCapture onCapture={f => setFiles(prev => ({ ...prev, rostro: f }))} />
+        <FaceCapture onCapture={file => setFiles(prev => ({ ...prev, rostro: file }))} />
         <label>Permiso de trabajo (si ya cuentas con uno)<input type="file" accept=".pdf,image/*" onChange={setFile('permiso')} /></label>
         <label className="check">
           <input type="checkbox" checked={consent} onChange={e => setConsent(e.target.checked)} required />

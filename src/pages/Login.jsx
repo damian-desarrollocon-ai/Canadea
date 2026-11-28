@@ -14,8 +14,14 @@ export default function Login() {
     e.preventDefault()
     setError('')
     if (demoMode) return nav('/consulta')
-    const { data, error } = await supabase.auth.signInWithPassword({ email, password })
-    if (error) return setError('Correo o contraseña incorrectos.')
+    const { data, error } = await supabase.auth.signInWithPassword({ email: email.trim(), password })
+    if (error) {
+      console.error(error)
+      const m = error.message || ''
+      if (/not confirmed/i.test(m)) return setError('Tu correo aún no está confirmado. Revisa tu bandeja de entrada o pide a la agencia que lo confirme.')
+      if (/invalid login/i.test(m)) return setError('Correo o contraseña incorrectos.')
+      return setError('No pudimos iniciar sesión. Intenta de nuevo en unos minutos.')
+    }
     const { data: p } = await supabase.from('profiles').select('role').eq('id', data.user.id).maybeSingle()
     nav(isStaff(p?.role) ? '/admin' : '/cuenta')
   }
