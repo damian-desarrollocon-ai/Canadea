@@ -109,7 +109,7 @@ export default function Home() {
 
       <section className="h-band" style={img('campo.jpg')}>
         <div className="site-inner">
-          <h2>Un proceso claro, de tu registro a tu llegada a Canadá</h2>
+          <h2>Los grandes sueños comienzan con una oportunidad.</h2>
           <Link className="btn gold" to="/registro">Empezar mi registro</Link>
         </div>
       </section>
